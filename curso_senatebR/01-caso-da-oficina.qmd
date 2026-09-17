@@ -4,7 +4,7 @@ title: "O caso da oficina"
 
 Slide 9 — resolve o PL 2.630/2020 para o `Codigo` interno do Senado. O `senatebR` não tem uma
 função de busca de matéria por sigla/número/ano, então este passo reaproveita `R/materia_lookup.R`
-deste projeto (a mesma lacuna aparece no [exemplo de emendas](../exemplo-aplicado-emendas.qmd)).
+deste projeto.
 
 ```{r caso-da-oficina, file="01_caso_da_oficina.R"}
 ```

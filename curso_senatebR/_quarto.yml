@@ -43,7 +43,6 @@ book:
         - aula_04_decisao_e_evidencia/06-comunicacao-visual.qmd
         - aula_04_decisao_e_evidencia/lab3.qmd
         - aula_04_decisao_e_evidencia/relatorio-quarto.qmd
-    - exemplo-aplicado-emendas.qmd
     - references.qmd
 
 execute:
