@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Oficina senatebR</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/vsntos/senatebR" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/vsntos/coletor_emendas" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -337,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Slide 53 — escolha a geometria a partir da pergunta, não do repertório que você já domina. <code>ggplot2</code> para comparação, <code>geobr</code> para território, <code>gt</code> para precisão.</p>
+<p>Slide 53 — escolha a geometria a partir da pergunta, não do repertório que você já domina. <code>ggplot2</code> para comparação (já visto em <a href="../aula_02_atores_e_arenas/03-quem-compoe-o-senado.html">Quem compõe o Senado?</a> e <a href="../aula_02_atores_e_arenas/04-arenas-comissoes.html">Olhar só para o plenário é suficiente?</a>), <code>geobr</code> para território, <code>gt</code> para precisão.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Script: 06_comunicacao_visual.R</span></span>
@@ -422,25 +422,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_comissoes =</span> <span class="st">"Nº comissões"</span></span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabela_top10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;div id="pujaceexig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"&gt;
-  &lt;style&gt;#pujaceexig table {
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>tabela_top10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="znxumjqpwv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#znxumjqpwv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pujaceexig thead, #pujaceexig tbody, #pujaceexig tfoot, #pujaceexig tr, #pujaceexig td, #pujaceexig th {
+#znxumjqpwv thead, #znxumjqpwv tbody, #znxumjqpwv tfoot, #znxumjqpwv tr, #znxumjqpwv td, #znxumjqpwv th {
   border-style: none;
 }
 
-#pujaceexig p {
+#znxumjqpwv p {
   margin: 0;
   padding: 0;
 }
 
-#pujaceexig .gt_table {
+#znxumjqpwv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -466,12 +466,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#pujaceexig .gt_caption {
+#znxumjqpwv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pujaceexig .gt_title {
+#znxumjqpwv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -483,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#pujaceexig .gt_subtitle {
+#znxumjqpwv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -495,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#pujaceexig .gt_heading {
+#znxumjqpwv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -507,13 +507,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pujaceexig .gt_bottom_border {
+#znxumjqpwv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pujaceexig .gt_col_headings {
+#znxumjqpwv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -528,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pujaceexig .gt_col_heading {
+#znxumjqpwv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -548,7 +548,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#pujaceexig .gt_column_spanner_outer {
+#znxumjqpwv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -560,15 +560,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#pujaceexig .gt_column_spanner_outer:first-child {
+#znxumjqpwv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pujaceexig .gt_column_spanner_outer:last-child {
+#znxumjqpwv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pujaceexig .gt_column_spanner {
+#znxumjqpwv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -580,11 +580,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#pujaceexig .gt_spanner_row {
+#znxumjqpwv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pujaceexig .gt_group_heading {
+#znxumjqpwv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -610,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#pujaceexig .gt_empty_group_heading {
+#znxumjqpwv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -625,15 +625,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#pujaceexig .gt_from_md &gt; :first-child {
+#znxumjqpwv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pujaceexig .gt_from_md &gt; :last-child {
+#znxumjqpwv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pujaceexig .gt_row {
+#znxumjqpwv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +652,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#pujaceexig .gt_stub {
+#znxumjqpwv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -665,7 +665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pujaceexig .gt_stub_row_group {
+#znxumjqpwv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -679,15 +679,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#pujaceexig .gt_row_group_first td {
+#znxumjqpwv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pujaceexig .gt_row_group_first th {
+#znxumjqpwv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pujaceexig .gt_summary_row {
+#znxumjqpwv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -697,16 +697,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pujaceexig .gt_first_summary_row {
+#znxumjqpwv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pujaceexig .gt_first_summary_row.thick {
+#znxumjqpwv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pujaceexig .gt_last_summary_row {
+#znxumjqpwv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -716,7 +716,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#pujaceexig .gt_grand_summary_row {
+#znxumjqpwv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -726,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pujaceexig .gt_first_grand_summary_row {
+#znxumjqpwv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -736,7 +736,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#pujaceexig .gt_last_grand_summary_row_top {
+#znxumjqpwv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -746,11 +746,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#pujaceexig .gt_striped {
+#znxumjqpwv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pujaceexig .gt_table_body {
+#znxumjqpwv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -759,7 +759,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#pujaceexig .gt_footnotes {
+#znxumjqpwv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -773,7 +773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pujaceexig .gt_footnote {
+#znxumjqpwv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -782,7 +782,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pujaceexig .gt_sourcenotes {
+#znxumjqpwv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -796,7 +796,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pujaceexig .gt_sourcenote {
+#znxumjqpwv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -804,136 +804,156 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pujaceexig .gt_left {
+#znxumjqpwv .gt_left {
   text-align: left;
 }
 
-#pujaceexig .gt_center {
+#znxumjqpwv .gt_center {
   text-align: center;
 }
 
-#pujaceexig .gt_right {
+#znxumjqpwv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pujaceexig .gt_font_normal {
+#znxumjqpwv .gt_font_normal {
   font-weight: normal;
 }
 
-#pujaceexig .gt_font_bold {
+#znxumjqpwv .gt_font_bold {
   font-weight: bold;
 }
 
-#pujaceexig .gt_font_italic {
+#znxumjqpwv .gt_font_italic {
   font-style: italic;
 }
 
-#pujaceexig .gt_super {
+#znxumjqpwv .gt_super {
   font-size: 65%;
 }
 
-#pujaceexig .gt_footnote_marks {
+#znxumjqpwv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pujaceexig .gt_asterisk {
+#znxumjqpwv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pujaceexig .gt_indent_1 {
+#znxumjqpwv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pujaceexig .gt_indent_2 {
+#znxumjqpwv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pujaceexig .gt_indent_3 {
+#znxumjqpwv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pujaceexig .gt_indent_4 {
+#znxumjqpwv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pujaceexig .gt_indent_5 {
+#znxumjqpwv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pujaceexig .katex-display {
+#znxumjqpwv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pujaceexig div.Reactable &gt; div.rt-table &gt; div.rt-thead &gt; div.rt-tr.rt-tr-group-header &gt; div.rt-th-group:after {
+#znxumjqpwv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
-&lt;/style&gt;
-  &lt;table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"&gt;
-  &lt;thead&gt;
-    &lt;tr class="gt_heading"&gt;
-      &lt;td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style&gt;Top 10 em participação em comissões&lt;/td&gt;
-    &lt;/tr&gt;
-    
-    &lt;tr class="gt_col_headings"&gt;
-      &lt;th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="NomeParlamentar"&gt;Senador(a)&lt;/th&gt;
-      &lt;th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="SiglaPartidoParlamentar"&gt;Partido&lt;/th&gt;
-      &lt;th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="UfParlamentar"&gt;UF&lt;/th&gt;
-      &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_comissoes"&gt;Nº comissões&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody class="gt_table_body"&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Paulo Paim&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PT&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;RS&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;220&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Randolfe Rodrigues&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PT&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;AP&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;219&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Sérgio Petecão&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PSD&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;AC&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;210&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Humberto Costa&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PT&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;PE&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;192&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Eduardo Girão&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;NOVO&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;NA&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;171&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Jayme Campos&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;UNIÃO&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;MT&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;162&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Wellington Fagundes&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PL&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;MT&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;159&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Flávio Arns&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PSB&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;PR&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;158&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Nelsinho Trad&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PSD&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;MS&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;156&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td headers="NomeParlamentar" class="gt_row gt_left"&gt;Izalci Lucas&lt;/td&gt;
-&lt;td headers="SiglaPartidoParlamentar" class="gt_row gt_left"&gt;PL&lt;/td&gt;
-&lt;td headers="UfParlamentar" class="gt_row gt_left"&gt;DF&lt;/td&gt;
-&lt;td headers="n_comissoes" class="gt_row gt_right"&gt;152&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-  
-&lt;/table&gt;
-&lt;/div&gt;</code></pre>
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">Top 10 em participação em comissões</th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="NomeParlamentar" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Senador(a)</th>
+<th id="SiglaPartidoParlamentar" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Partido</th>
+<th id="UfParlamentar" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">UF</th>
+<th id="n_comissoes" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Nº comissões</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="NomeParlamentar">Paulo Paim</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PT</td>
+<td class="gt_row gt_left" headers="UfParlamentar">RS</td>
+<td class="gt_row gt_right" headers="n_comissoes">220</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="NomeParlamentar">Randolfe Rodrigues</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PT</td>
+<td class="gt_row gt_left" headers="UfParlamentar">AP</td>
+<td class="gt_row gt_right" headers="n_comissoes">219</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="NomeParlamentar">Sérgio Petecão</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PSD</td>
+<td class="gt_row gt_left" headers="UfParlamentar">AC</td>
+<td class="gt_row gt_right" headers="n_comissoes">210</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="NomeParlamentar">Humberto Costa</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PT</td>
+<td class="gt_row gt_left" headers="UfParlamentar">PE</td>
+<td class="gt_row gt_right" headers="n_comissoes">192</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="NomeParlamentar">Eduardo Girão</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">NOVO</td>
+<td class="gt_row gt_left" headers="UfParlamentar">NA</td>
+<td class="gt_row gt_right" headers="n_comissoes">171</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="NomeParlamentar">Jayme Campos</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">UNIÃO</td>
+<td class="gt_row gt_left" headers="UfParlamentar">MT</td>
+<td class="gt_row gt_right" headers="n_comissoes">162</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="NomeParlamentar">Wellington Fagundes</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PL</td>
+<td class="gt_row gt_left" headers="UfParlamentar">MT</td>
+<td class="gt_row gt_right" headers="n_comissoes">159</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="NomeParlamentar">Flávio Arns</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PSB</td>
+<td class="gt_row gt_left" headers="UfParlamentar">PR</td>
+<td class="gt_row gt_right" headers="n_comissoes">158</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="NomeParlamentar">Nelsinho Trad</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PSD</td>
+<td class="gt_row gt_left" headers="UfParlamentar">MS</td>
+<td class="gt_row gt_right" headers="n_comissoes">156</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="NomeParlamentar">Izalci Lucas</td>
+<td class="gt_row gt_left" headers="SiglaPartidoParlamentar">PL</td>
+<td class="gt_row gt_left" headers="UfParlamentar">DF</td>
+<td class="gt_row gt_right" headers="n_comissoes">152</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escolha a geometria a partir da pergunta -- nao do repertorio que voce</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ja domina.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escolha a geometria a partir da pergunta -- nao do repertorio que voce</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ja domina.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="../figuras/mapa-comissoes-por-uf.png" class="img-fluid"></p>
 
