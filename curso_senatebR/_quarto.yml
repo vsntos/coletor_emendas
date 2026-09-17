@@ -10,7 +10,7 @@ book:
   page-footer:
     left: "Oficina senatebR · CC BY 4.0"
     right: "Livro-tutorial: vsntos.github.io/senatebR-curso"
-  repo-url: https://github.com/vsntos/senatebR
+  repo-url: https://github.com/vsntos/coletor_emendas
   chapters:
     - index.qmd
     - 00-setup.qmd

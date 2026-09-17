@@ -81,7 +81,7 @@ tabela_top10 <- membros |>
     n_comissoes = "Nº comissões"
   )
 
-print(tabela_top10)
+tabela_top10
 
 # Escolha a geometria a partir da pergunta -- nao do repertorio que voce
 # ja domina.
