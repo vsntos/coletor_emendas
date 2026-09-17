@@ -1,0 +1,12 @@
+---
+title: "O jogo completo"
+---
+
+Slides 13–19 — sem laboratório nesta aula. Uma pergunta política de ponta a ponta em ~20 min:
+os partidos realmente votam como blocos? Coleta → transformação → Índice de Rice → gráfico →
+interpretação.
+
+```{r demo-jogo-completo, file="demo_jogo_completo.R"}
+```
+
+![](../figuras/coesao-2023.png)

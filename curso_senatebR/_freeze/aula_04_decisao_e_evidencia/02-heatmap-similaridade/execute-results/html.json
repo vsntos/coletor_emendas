@@ -1,0 +1,17 @@
+{
+  "hash": "5f4e6b3e1c0cdb1b474d18080bec68c0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"A matriz como imagem\"\n---\n\n\n\n\nSlide 48 — o momento visual mais forte da oficina. Ordenada por agrupamento hierárquico, a\nmatriz revela blocos — e os blocos não coincidem perfeitamente com os partidos.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# ============================================================\n# Script: 02_heatmap_similaridade.R\n# Author: Vinicius Santos\n# Date: 2026-09-17\n# Purpose: Aula 4, \"a matriz como imagem\" (slide 48) -- o momento visual\n#          mais forte da oficina. Ordenada por agrupamento hierarquico, a\n#          matriz revela blocos -- e os blocos nao coincidem perfeitamente\n#          com os partidos. Onde os blocos nao seguem a legenda partidaria\n#          esta a proxima pesquisa.\n# Inputs: curso_senatebR/dados/sim_mat_2023.rds\n#         (de 01_matriz_votacao_nominal.R)\n# Outputs: curso_senatebR/figuras/heatmap-similaridade-2023.png\n# ============================================================\n\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\n\nsim_mat <- readRDS(here::here(\"curso_senatebR/dados/sim_mat_2023.rds\"))\n\nord <- stats::hclust(stats::as.dist(1 - sim_mat))$order\nordem_codigos <- rownames(sim_mat)[ord]\n\ngrafico <- sim_mat |>\n  tibble::as_tibble(rownames = \"a\") |>\n  tidyr::pivot_longer(-a, names_to = \"b\", values_to = \"value\") |>\n  dplyr::mutate(\n    a = factor(a, levels = ordem_codigos),\n    b = factor(b, levels = ordem_codigos)\n  ) |>\n  ggplot2::ggplot(ggplot2::aes(a, b, fill = value)) +\n  ggplot2::geom_tile() +\n  ggplot2::scale_fill_viridis_c(name = \"Similaridade\") +\n  ggplot2::labs(\n    title = \"Quem vota como quem -- nominais de 2023\",\n    subtitle = \"Ordenado por agrupamento hierárquico (linhas/colunas = CodigoParlamentar)\",\n    x = NULL, y = NULL\n  ) +\n  ggplot2::theme_minimal() +\n  ggplot2::theme(\n    axis.text = ggplot2::element_blank(),\n    axis.ticks = ggplot2::element_blank()\n  )\n\ndir.create(here::here(\"curso_senatebR/figuras\"), recursive = TRUE, showWarnings = FALSE)\nggplot2::ggsave(here::here(\"curso_senatebR/figuras/heatmap-similaridade-2023.png\"), grafico, width = 8, height = 7, dpi = 300)\nmessage(\"Heatmap salvo em curso_senatebR/figuras/heatmap-similaridade-2023.png\")\n```\n:::\n\n\n\n\n![](../figuras/heatmap-similaridade-2023.png)\n",
+    "supporting": [
+      "02-heatmap-similaridade_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

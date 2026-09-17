@@ -1,0 +1,9 @@
+---
+title: "Colete uma vez, analise cem"
+---
+
+Slide 24 — disciplina de projeto: separar coleta de análise, com `Sys.sleep()` + `tryCatch()`
+em qualquer loop contra a API.
+
+```{r coleta-responsavel, file="01_coleta_responsavel.R"}
+```

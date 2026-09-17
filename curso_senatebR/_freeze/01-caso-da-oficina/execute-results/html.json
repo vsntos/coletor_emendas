@@ -1,0 +1,15 @@
+{
+  "hash": "e9783662d2900e8592101c8c051c371a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"O caso da oficina\"\n---\n\n\n\n\nSlide 9 — resolve o PL 2.630/2020 para o `Codigo` interno do Senado. O `senatebR` não tem uma\nfunção de busca de matéria por sigla/número/ano, então este passo reaproveita `R/materia_lookup.R`\ndeste projeto (a mesma lacuna aparece no [exemplo de emendas](../exemplo-aplicado-emendas.qmd)).\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# ============================================================\n# Script: 01_caso_da_oficina.R\n# Author: Vinicius Santos\n# Date: 2026-09-17\n# Purpose: Resolve o caso que atravessa toda a oficina (slide 9): o PL\n#          2.630/2020 (regulacao de plataformas digitais / \"Lei das Fake\n#          News\"), aprovado pelo Senado em 2020 e travado a partir dali.\n#          Os labs 1-3 e os scripts de demonstracao das aulas 2-4 usam o\n#          `Codigo` salvo aqui.\n#\n#          NOTA METODOLOGICA: o senatebR nao tem uma funcao de busca de\n#          materia por sigla/numero/ano -- todas as suas 36 funcoes\n#          recebem um `Codigo` ja resolvido. Por isso reaproveitamos\n#          `R/materia_lookup.R::buscar_codigo_materia()`, ja existente na\n#          raiz deste projeto (construido para o pipeline de emendas do\n#          PL 2338/2023 -- ver exemplos_aplicados/ranking_de_emendas.md).\n#          E a mesma lacuna da API nos dois casos.\n# Inputs: none\n# Outputs: curso_senatebR/dados/caso_pl2630.rds\n# ============================================================\n\nsource(here::here(\"R\", \"materia_lookup.R\"))\n\ninfo <- buscar_codigo_materia(\"PL\", 2630, 2020)\n\nif (is.null(info)) stop(\"Nao foi possivel localizar o PL 2630/2020.\")\n\nmessage(\"Caso da oficina: \", info$identificacao, \" (Codigo \", info$codigo, \")\")\nmessage(\"Ementa: \", info$ementa)\nmessage(\"Autor: \", info$autor)\n\ndir.create(here::here(\"curso_senatebR\", \"dados\"), recursive = TRUE, showWarnings = FALSE)\nsaveRDS(info, here::here(\"curso_senatebR\", \"dados\", \"caso_pl2630.rds\"))\nmessage(\"Salvo em curso_senatebR/dados/caso_pl2630.rds\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

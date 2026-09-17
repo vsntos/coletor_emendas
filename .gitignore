@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+curso_senatebR/_book/
+curso_senatebR/.quarto/
+curso_senatebR/*_cache/
+curso_senatebR/*_files/
+curso_senatebR/*/*_cache/
+curso_senatebR/*/*_files/

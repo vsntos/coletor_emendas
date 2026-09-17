@@ -1,0 +1,26 @@
+---
+title: "Como citar"
+---
+
+Slide 61 — cite a versão do pacote, não apenas o nome. A API muda; o número de versão é o que
+torna seu resultado auditável.
+
+```r
+# a referência canônica vem do próprio pacote
+citation("senatebR")
+
+# e registre o ambiente inteiro
+sessionInfo()
+renv::snapshot()
+```
+
+> SANTOS, Vinicius. *senatebR: Acesso aos Dados Abertos do Senado Federal Brasileiro*. Pacote R.
+> Disponível em: `github.com/vsntos/senatebR`
+
+> SANTOS, Vinicius. *senatebR: Coletando e Analisando Dados do Senado Federal Brasileiro*.
+> Livro-tutorial. Disponível em: `vsntos.github.io/senatebR-curso`
+
+Encontrou um bug ou um endpoint quebrado? Abra uma issue — manutenção de infraestrutura de dados
+é trabalho coletivo, e é a parte que ninguém financia.
+
+Licença deste material: CC BY 4.0.

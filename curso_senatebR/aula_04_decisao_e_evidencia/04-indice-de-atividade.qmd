@@ -1,0 +1,9 @@
+---
+title: "Quem são os senadores mais ativos?"
+---
+
+Slide 50 — estudo de caso 1 do livro. Cruzando três fontes (presença, discursos, comissões) num
+único índice via z-score. Critique o índice: somar três z-scores assume pesos iguais.
+
+```{r indice-de-atividade, file="04_indice_de_atividade.R"}
+```

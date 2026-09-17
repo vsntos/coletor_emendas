@@ -1,0 +1,8 @@
+---
+title: "Instalação e teste de fumaça"
+---
+
+Antes de tudo (slide 21) — instala as dependências e confirma que a API do Senado responde.
+
+```{r setup, file="00_setup.R"}
+```

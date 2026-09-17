@@ -1,0 +1,9 @@
+---
+title: "Nunca junte por nome"
+---
+
+Slide 36 — a cola da análise. "João Silva" e "João da Silva" podem ser a mesma pessoa; "4981" é
+sempre "4981". Toda análise legislativa séria é uma sequência de joins bem-feitos.
+
+```{r chaves-e-joins, file="01_chaves_e_joins.R"}
+```

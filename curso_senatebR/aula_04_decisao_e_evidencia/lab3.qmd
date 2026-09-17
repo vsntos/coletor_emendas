@@ -1,0 +1,8 @@
+---
+title: "Lab 3 · Similaridade de voto (gabarito)"
+---
+
+Slide 52, 25 min, em duplas — quem votou como quem, e o partido explica?
+
+```{r lab3, file="lab3_similaridade_de_voto_gabarito.R"}
+```

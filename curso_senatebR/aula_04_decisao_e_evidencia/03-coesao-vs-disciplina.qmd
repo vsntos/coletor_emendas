@@ -1,0 +1,9 @@
+---
+title: "Coesão não é disciplina"
+---
+
+Slide 49 — estudo de caso 2 do livro. Coesão mede se a bancada votou junto; disciplina mede se
+votou junto com o líder. Uma bancada pode ser coesa contra a própria liderança.
+
+```{r coesao-vs-disciplina, file="03_coesao_vs_disciplina.R"}
+```

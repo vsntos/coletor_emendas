@@ -1,0 +1,23 @@
+---
+title: "Exemplo aplicado: ranking de emendas"
+---
+
+O `senatebR` não tem uma função para emendas de uma matéria — não é uma das suas 36 funções. Isso
+não impede o método de funcionar: este projeto tem um pipeline real, construído antes desta
+oficina ser organizada, que responde "qual foi o volume de interesse parlamentar (emendas) pelo
+PL 2338/2023 (Marco Legal da IA), e como ele se compara a outros projetos de 2023?" — usando a
+mesma sequência API → JSON → tabela → indicador → evidência ensinada nas quatro aulas, só que
+escrita à mão com `httr`/`jsonlite` onde o pacote ainda não chega.
+
+**Resultado:** 244 emendas ao PL 2338/2023 na fase Senado; top autor Mecias de Jesus
+(Republicanos-RR, 41 emendas); 1º lugar entre 110 PLs de 2023 que também chegaram a "aprovado em
+Plenário" (percentil 100, outlier claro — a mediana do grupo foi de 1 emenda por projeto).
+
+O pipeline completo, com o código-fonte e as ressalvas metodológicas, está documentado em
+`exemplos_aplicados/ranking_de_emendas.md` e nos scripts `R/` e `scripts/01`–`05` na raiz do
+projeto `coletor_emendas` — não duplicado aqui.
+
+## A lição
+
+Você não precisa que uma das 36 funções exista para aplicar o método. O pacote economiza o
+trabalho onde ele já existe; o método é o que você usa onde ele ainda não existe.

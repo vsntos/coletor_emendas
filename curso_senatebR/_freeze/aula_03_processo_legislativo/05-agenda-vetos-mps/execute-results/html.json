@@ -1,0 +1,15 @@
+{
+  "hash": "f625d439f33f61982c3a022b9254059f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"O Legislativo no presente\"\n---\n\n\n\n\nSlide 42 — monitoramento. Veto é decisão legislativa; MP é o Executivo legislando. O bloco mais\nútil das quatro aulas para jornalismo de dados.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# ============================================================\n# Script: 05_agenda_vetos_mps.R\n# Author: Vinicius Santos\n# Date: 2026-09-17\n# Purpose: Aula 3, \"o Legislativo no presente\" (slide 42) -- monitoramento.\n#          Veto e decisao legislativa: uma lei aprovada e vetada em parte\n#          nao e a lei que o Senado votou. MP e o Executivo legislando:\n#          medir producao legislativa sem MPs superestima o Congresso como\n#          origem da lei. Estas quatro funcoes deixam de descrever o\n#          passado e passam a acompanhar o presente -- o bloco mais util\n#          para jornalismo de dados das quatro aulas.\n# Inputs: none\n# Outputs: none (script de demonstracao)\n# ============================================================\n\nlibrary(senatebR)\n\nhoje <- Sys.Date()\n\n# o que esta pautado hoje (info_agenda exige anos/meses/dias explicitos)\nagenda <- info_agenda(\n  anos = as.integer(format(hoje, \"%Y\")),\n  meses = as.integer(format(hoje, \"%m\")),\n  dias = as.integer(format(hoje, \"%d\"))\n)\nmessage(nrow(agenda), \" itens de agenda para hoje (\", hoje, \").\")\n\n# vetos presidenciais e seus detalhes\nvetos <- info_vetos()\nmessage(nrow(vetos), \" vetos no catalogo mais recente.\")\n\ndetalhes <- extrair_detalhes_vetos(urls = utils::head(vetos$Link, 3))\nbase_vetos <- dados_vetos(urls = utils::head(vetos$Link, 3))\nmessage(nrow(detalhes), \" detalhes de veto obtidos (amostra de 3 urls, \",\n        \"para nao sobrecarregar o servidor de congressonacional.leg.br).\")\n\n# o Executivo legislando\nmps_ativas <- coletar_medidas_provisorias_em_tramitacao()\nmps_fim <- coletar_medidas_provisorias_encerradas(numero_ultima_pagina = 1)\nmessage(nrow(mps_ativas), \" MPs em tramitacao; \", nrow(mps_fim),\n        \" MPs encerradas na primeira pagina do catalogo.\")\n\n# Para jornalismo de dados, este e o bloco mais util das quatro aulas: um\n# script que roda toda segunda-feira e avisa o que entrou na pauta.\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

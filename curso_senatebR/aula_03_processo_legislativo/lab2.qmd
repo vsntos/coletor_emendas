@@ -1,0 +1,8 @@
+---
+title: "Lab 2 · Tramitação do caso (gabarito)"
+---
+
+Slide 43, 20 min, em duplas — o PL 2.630/2020 tramitou rápido ou lento? Defenda com número.
+
+```{r lab2, file="lab2_tramitacao_do_caso_gabarito.R"}
+```

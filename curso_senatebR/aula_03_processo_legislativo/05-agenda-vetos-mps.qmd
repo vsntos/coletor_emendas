@@ -1,0 +1,9 @@
+---
+title: "O Legislativo no presente"
+---
+
+Slide 42 — monitoramento. Veto é decisão legislativa; MP é o Executivo legislando. O bloco mais
+útil das quatro aulas para jornalismo de dados.
+
+```{r agenda-vetos-mps, file="05_agenda_vetos_mps.R"}
+```

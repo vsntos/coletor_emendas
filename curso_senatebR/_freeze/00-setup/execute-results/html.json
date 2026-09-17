@@ -1,0 +1,15 @@
+{
+  "hash": "06b3e28560bc5feb9aef82430d4f6b30",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Instalação e teste de fumaça\"\n---\n\n\n\n\nAntes de tudo (slide 21) — instala as dependências e confirma que a API do Senado responde.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# ============================================================\n# Script: 00_setup.R\n# Author: Vinicius Santos\n# Date: 2026-09-17\n# Purpose: Instalacao e teste de fumaca do curso senatebR (slide 21 da\n#          oficina). Roda uma unica vez, antes de qualquer outro script\n#          desta pasta.\n# Inputs: none\n# Outputs: curso_senatebR/dados/senadores_57.rds\n# ============================================================\n\n# 1. o pacote esta no CRAN\nif (!requireNamespace(\"senatebR\", quietly = TRUE)) install.packages(\"senatebR\")\n\n# 2. pacotes de apoio da oficina\npacotes_apoio <- c(\"tidyverse\", \"lubridate\", \"gt\", \"igraph\", \"ggraph\", \"geobr\")\nfaltando <- pacotes_apoio[!vapply(pacotes_apoio, requireNamespace, logical(1), quietly = TRUE)]\nif (length(faltando) > 0) install.packages(faltando)\n\n# 3. carregar\nlibrary(senatebR)\nlibrary(tidyverse)\n\n# 4. teste de fumaca: a API responde?\nsenadores <- obter_dados_senadores_legislatura(57, 57)\ndim(senadores)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 245  13\n```\n\n\n:::\n\n```{.r .cell-code}\n# 5. guarde ja em disco\ndir.create(\"curso_senatebR/dados\", recursive = TRUE, showWarnings = FALSE)\nsaveRDS(senadores, \"curso_senatebR/dados/senadores_57.rds\")\n\nmessage(\"Setup ok. \", nrow(senadores), \" senadores da 57a legislatura salvos em \",\n        \"curso_senatebR/dados/senadores_57.rds\")\n\n# REQUISITOS\n# - R >= 4.1\n# - RStudio ou Positron\n# - Conexao aberta com legis.senado.leg.br\n#\n# SE FALHAR: proxy institucional e certificado SSL sao os erros mais comuns.\n# Trabalhe sempre dentro de um projeto RStudio, com caminho relativo e script\n# versionado -- reprodutibilidade comeca aqui, nao no fim.\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

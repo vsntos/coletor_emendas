@@ -1,0 +1,17 @@
+{
+  "hash": "e4f509cb810f0ca1440e5bef6af6208f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Uma hipótese testável\"\n---\n\n\n\n\nSlide 40 — o calendário eleitoral organiza a produção legislativa? Estudo de caso 3 do livro. O\ngráfico não prova a hipótese; ele torna a hipótese discutível.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# ============================================================\n# Script: 03_hipotese_ano_eleitoral.R\n# Author: Vinicius Santos\n# Date: 2026-09-17\n# Purpose: Aula 3, hipotese testavel (slide 40) -- o calendario eleitoral\n#          organiza a producao legislativa? Hipotese institucional: em ano\n#          eleitoral, parlamentares apresentam mais projetos porque\n#          apresentacao e sinalizacao barata para o eleitor. Estudo de\n#          caso 3 do livro-tutorial.\n# Inputs: curso_senatebR/dados/materias_legislatura_atual.rds\n#         (de 02_materias_e_tramitacao.R)\n# Outputs: curso_senatebR/figuras/materias-ano-eleitoral.png\n# ============================================================\n\nlibrary(lubridate)\nlibrary(dplyr)\nlibrary(ggplot2)\n\nmaterias <- readRDS(here::here(\"curso_senatebR/dados/materias_legislatura_atual.rds\"))\n\npor_ano <- materias |>\n  dplyr::filter(!is.na(AnoMateria)) |>\n  dplyr::mutate(\n    Ano = as.integer(AnoMateria),\n    # municipais: multiplos de 4 · gerais: multiplos de 4 + 2\n    ano_eleitoral = (Ano %% 4 == 2) | (Ano %% 4 == 0)\n  ) |>\n  dplyr::count(Ano, ano_eleitoral)\n\ngrafico <- por_ano |>\n  ggplot2::ggplot(ggplot2::aes(x = Ano, y = n, fill = ano_eleitoral)) +\n  ggplot2::geom_col() +\n  ggplot2::scale_fill_manual(\n    values = c(\"FALSE\" = \"#5ba4cf\", \"TRUE\" = \"#e76f51\"),\n    labels = c(\"Não eleitoral\", \"Eleitoral\")\n  ) +\n  ggplot2::labs(\n    title = \"Matérias apresentadas por ano\",\n    subtitle = \"Anos eleitorais em destaque\",\n    x = NULL, y = \"Quantidade\", fill = NULL\n  ) +\n  ggplot2::theme_minimal()\n\ndir.create(here::here(\"curso_senatebR/figuras\"), recursive = TRUE, showWarnings = FALSE)\nggplot2::ggsave(here::here(\"curso_senatebR/figuras/materias-ano-eleitoral.png\"), grafico, width = 9, height = 5, dpi = 300)\n\nprint(por_ano |> dplyr::arrange(dplyr::desc(Ano)) |> utils::head(10))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n    Ano ano_eleitoral    n\n1  2026          TRUE 1402\n2  2025         FALSE 2003\n3  2024          TRUE 1577\n4  2023         FALSE 1597\n5  2022          TRUE  808\n6  2021         FALSE  928\n7  2020          TRUE  610\n8  2019         FALSE 1264\n9  2018          TRUE   71\n10 2017         FALSE   86\n```\n\n\n:::\n\n```{.r .cell-code}\n# O erro classico: a legislatura atual esta incompleta -- o ultimo ano da\n# serie sempre parece uma queda, e nao e. (Esta base tambem so cobre\n# materias que AINDA tramitam -- ver nota em 02_materias_e_tramitacao.R --\n# entao anos antigos aqui tendem a estar sub-representados: materias\n# velhas em geral ja saem da lista de \"tramitando\".)\n#\n# Este grafico nao prova a hipotese. Ele torna a hipotese discutivel --\n# que e tudo o que um grafico deveria fazer.\n```\n:::\n\n\n\n\n![](../figuras/materias-ano-eleitoral.png)\n",
+    "supporting": [
+      "03-hipotese-ano-eleitoral_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

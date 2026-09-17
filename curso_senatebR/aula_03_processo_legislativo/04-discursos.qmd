@@ -1,0 +1,9 @@
+---
+title: "Voto é escasso. Palavra, não."
+---
+
+Slide 41 — o Legislativo como texto. Três perguntas que só o texto responde: sobre o que um
+parlamentar fala, com que frequência, e com quem disputa a palavra.
+
+```{r discursos, file="04_discursos.R"}
+```

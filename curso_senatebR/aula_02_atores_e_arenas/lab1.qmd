@@ -1,0 +1,11 @@
+---
+title: "Lab 1 · Composição e poder (gabarito)"
+---
+
+Slide 32, 20 min — quem compôs o Senado que decidiu o caso da oficina (PL 2.630/2020) e onde
+esse poder se concentra?
+
+```{r lab1, file="lab1_composicao_e_poder_gabarito.R"}
+```
+
+![](../figuras/lab1-bancada-partido.png)

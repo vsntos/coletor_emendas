@@ -1,0 +1,9 @@
+---
+title: "A armadilha nº 1: nomes de coluna"
+---
+
+Slide 25 — os nomes de coluna vêm do XML da API, não são escolha do pacote. Regra da sala: rode
+`names()`/`glimpse()` antes de qualquer pipeline, sem exceção.
+
+```{r armadilha-nomes, file="02_armadilha_nomes_de_coluna.R"}
+```

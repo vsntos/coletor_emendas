@@ -1,0 +1,27 @@
+---
+title: "O script vira documento"
+---
+
+Slide 55 — um arquivo `.qmd`, três formatos (página, PDF e slides). `cache: true` evita
+recoletar a cada render; o número no texto vem do objeto, não foi digitado.
+
+Este é um arquivo Quarto **separado e autônomo** (não um capítulo deste livro — ele declara os
+próprios formatos `html`/`pdf`/`revealjs`, incompatíveis com o formato deste site): veja o código
+fonte em `relatorio_exemplo.qmd`, na mesma pasta deste capítulo, e renderize-o com
+`quarto render relatorio_exemplo.qmd`.
+
+```{.r filename="relatorio_exemplo.qmd (trecho do YAML)"}
+---
+title: "Coesão partidária no Senado, 2023"
+format:
+  html: default
+  pdf: default
+  revealjs: default
+execute:
+  echo: false
+  cache: true
+---
+```
+
+É aqui que a reprodutibilidade deixa de ser discurso: qualquer pessoa clona o repositório e roda
+`quarto render` para obter o documento inteiro a partir da API do Senado.

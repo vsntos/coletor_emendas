@@ -1,0 +1,45 @@
+---
+title: "Oficina senatebR"
+subtitle: "Da pergunta política à evidência legislativa"
+---
+
+## O que é isto
+
+Material de apoio da oficina do pacote R [`senatebR`](https://github.com/vsntos/senatebR) —
+coleta e análise de dados abertos do Senado Federal Brasileiro. Cada capítulo deste site é o
+código real de um script, já rodado com sucesso contra a API do Senado — não pseudocódigo.
+
+> É um método para observar o Legislativo por meio de dados. Não é um catálogo de 36 funções.
+> Não é um curso introdutório de R.
+
+**Livro de apoio:** SANTOS, Vinicius. *senatebR: Coletando e Analisando Dados do Senado Federal
+Brasileiro*. Disponível em `vsntos.github.io/senatebR-curso`.
+
+## Estrutura
+
+| Aula | Tema | Laboratório |
+|---|---|---|
+| 1 | O caso, o mapa do pacote (36 funções, 7 categorias), o jogo completo | — (demonstração) |
+| 2 | Coleta responsável, nomes de coluna, senadores, comissões | Lab 1 (20 min) |
+| 3 | Chaves e joins, matérias e tramitação, discursos, agenda/vetos/MPs | Lab 2 (20 min) |
+| 4 | Votação nominal, coesão × disciplina, índice de atividade, redes, comunicação | Lab 3 (25 min) |
+
+Os laboratórios trazem o **gabarito resolvido** — código completo, não um esqueleto.
+
+## O caso que atravessa a oficina
+
+**PL 2.630/2020** (regulação de plataformas digitais — "Lei das Fake News"), aprovado pelo Senado
+em 2020 e remetido à Câmara dos Deputados a partir dali. Cada aula reconstrói uma parte da
+trajetória desse projeto: quem votou, por quais arenas passou, o que aconteceu com ele, como o
+plenário se dividiu, o que os dados permitem afirmar.
+
+## Antes de começar
+
+1. R ≥ 4.1, RStudio ou Positron, conexão aberta com `legis.senado.leg.br`.
+2. Rode o capítulo [Instalação e teste de fumaça](00-setup.qmd) uma vez.
+3. Rode [O caso da oficina](01-caso-da-oficina.qmd) para resolver o PL 2.630/2020.
+4. Siga as aulas em ordem — cada capítulo assume que os anteriores da mesma aula já rodaram.
+
+## Licença
+
+CC BY 4.0 — use, adapte e ensine com este material, dando o crédito.

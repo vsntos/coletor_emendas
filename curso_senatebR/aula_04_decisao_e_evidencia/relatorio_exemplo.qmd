@@ -1,0 +1,76 @@
+---
+title: "Coesão partidária no Senado, 2023"
+author: "Vinicius Santos"
+format:
+  html: default
+  pdf: default
+  revealjs: default
+execute:
+  echo: false
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(senatebR)
+library(tidyverse)
+
+votacoes <- extrair_votacoes_nominais_por_ano(anos = 2023)
+
+rice <- votacoes |>
+  filter(Secreta == "N", Votos.Voto %in% c("Sim", "Não")) |>
+  count(CodigoSessaoVotacao, Votos.SiglaPartido, Votos.Voto) |>
+  pivot_wider(names_from = Votos.Voto, values_from = n, values_fill = 0) |>
+  rename(sim = "Sim", nao = "Não") |>
+  filter(sim + nao >= 3) |>
+  mutate(rice = abs(sim - nao) / (sim + nao))
+
+coesao <- rice |>
+  group_by(Votos.SiglaPartido) |>
+  summarise(rice_medio = mean(rice), n_votacoes = n(), .groups = "drop") |>
+  filter(n_votacoes >= 20) |>
+  arrange(desc(rice_medio))
+```
+
+## O que fizemos
+
+Coletamos todas as votações nominais do Senado em 2023 via `senatebR` e calculamos o Índice de
+Rice — `|sim − não| / (sim + não)` — para cada partido com pelo menos 20 votações registradas.
+
+## Resultado
+
+O Rice médio entre os partidos analisados foi de `r round(mean(coesao$rice_medio), 2)`, com o
+partido mais coeso registrando `r round(max(coesao$rice_medio), 2)`.
+
+```{r}
+#| label: grafico-coesao
+coesao |>
+  ggplot(aes(x = rice_medio, y = fct_reorder(Votos.SiglaPartido, rice_medio))) +
+  geom_col(fill = "#17543A", width = .7) +
+  geom_text(aes(label = sprintf("%.2f", rice_medio)), hjust = -0.2, size = 4) +
+  scale_x_continuous(limits = c(0, 1.05)) +
+  labs(
+    title = "Partidos votam como blocos?",
+    subtitle = "Índice de Rice médio, nominais de 2023",
+    x = "Rice médio", y = NULL,
+    caption = "Fonte: Senado Federal via senatebR"
+  ) +
+  theme_minimal(base_size = 13)
+```
+
+```{r}
+#| label: tabela-coesao
+coesao |>
+  gt::gt() |>
+  gt::tab_header(title = "Coesão partidária, nominais de 2023") |>
+  gt::fmt_number(columns = rice_medio, decimals = 2)
+```
+
+## Nota
+
+`cache: true` evita recoletar a cada render. Sem isso, cada vez que você corrigir uma vírgula no
+texto, o script bate na API de novo. E o número no texto (`round(mean(coesao$rice_medio), 2)`) vem
+do objeto `coesao`, não foi digitado — se os dados mudarem, o texto muda junto. É aqui que a
+reprodutibilidade deixa de ser discurso: `quarto render relatorio_exemplo.qmd` reproduz este
+documento inteiro a partir da API do Senado.

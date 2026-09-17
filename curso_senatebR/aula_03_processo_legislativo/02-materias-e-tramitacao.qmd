@@ -1,0 +1,9 @@
+---
+title: "O que tramita — e o que travou?"
+---
+
+Slide 39 — apresentar um projeto é um ato individual e barato; decidir é coletivo, caro e
+procedimental. Contar matérias mede oferta, não produção legislativa.
+
+```{r materias-e-tramitacao, file="02_materias_e_tramitacao.R"}
+```

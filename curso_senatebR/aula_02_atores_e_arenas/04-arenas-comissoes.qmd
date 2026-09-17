@@ -1,0 +1,9 @@
+---
+title: "Olhar só para o plenário é suficiente?"
+---
+
+Slide 29 — arenas. Senador → comissão → reunião → matéria → decisão. O join é o momento em que
+duas tabelas se tornam uma estrutura institucional.
+
+```{r arenas-comissoes, file="04_arenas_comissoes.R"}
+```

@@ -1,0 +1,9 @@
+---
+title: "Quem compõe o Senado?"
+---
+
+Slide 28 — quatro verbos resolvem a maior parte das perguntas descritivas: `select`, `count`,
+`group_by`, `summarise`.
+
+```{r quem-compoe, file="03_quem_compoe_o_senado.R"}
+```

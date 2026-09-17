@@ -1,0 +1,58 @@
+project:
+  type: book
+
+book:
+  title: "Oficina senatebR"
+  subtitle: "Da pergunta política à evidência legislativa"
+  author: "Vinicius Santos"
+  date: today
+  date-format: "YYYY"
+  page-footer:
+    left: "Oficina senatebR · CC BY 4.0"
+    right: "Livro-tutorial: vsntos.github.io/senatebR-curso"
+  repo-url: https://github.com/vsntos/senatebR
+  chapters:
+    - index.qmd
+    - 00-setup.qmd
+    - 01-caso-da-oficina.qmd
+    - part: "Aula 1 · A pergunta antes da ferramenta"
+      chapters:
+        - aula_01_pergunta_antes_da_ferramenta/demo.qmd
+    - part: "Aula 2 · Atores e arenas"
+      chapters:
+        - aula_02_atores_e_arenas/01-coleta-responsavel.qmd
+        - aula_02_atores_e_arenas/02-armadilha-nomes-de-coluna.qmd
+        - aula_02_atores_e_arenas/03-quem-compoe-o-senado.qmd
+        - aula_02_atores_e_arenas/04-arenas-comissoes.qmd
+        - aula_02_atores_e_arenas/lab1.qmd
+    - part: "Aula 3 · O processo legislativo"
+      chapters:
+        - aula_03_processo_legislativo/01-chaves-e-joins.qmd
+        - aula_03_processo_legislativo/02-materias-e-tramitacao.qmd
+        - aula_03_processo_legislativo/03-hipotese-ano-eleitoral.qmd
+        - aula_03_processo_legislativo/04-discursos.qmd
+        - aula_03_processo_legislativo/05-agenda-vetos-mps.qmd
+        - aula_03_processo_legislativo/lab2.qmd
+    - part: "Aula 4 · Decisão e evidência"
+      chapters:
+        - aula_04_decisao_e_evidencia/01-matriz-votacao-nominal.qmd
+        - aula_04_decisao_e_evidencia/02-heatmap-similaridade.qmd
+        - aula_04_decisao_e_evidencia/03-coesao-vs-disciplina.qmd
+        - aula_04_decisao_e_evidencia/04-indice-de-atividade.qmd
+        - aula_04_decisao_e_evidencia/05-rede-de-coautoria.qmd
+        - aula_04_decisao_e_evidencia/06-comunicacao-visual.qmd
+        - aula_04_decisao_e_evidencia/lab3.qmd
+        - aula_04_decisao_e_evidencia/relatorio-quarto.qmd
+    - exemplo-aplicado-emendas.qmd
+    - references.qmd
+
+execute:
+  freeze: auto
+  warning: false
+
+format:
+  html:
+    theme: cosmo
+    code-fold: false
+    toc: true
+    number-sections: false

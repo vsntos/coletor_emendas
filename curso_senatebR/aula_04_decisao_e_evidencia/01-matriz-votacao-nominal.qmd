@@ -1,0 +1,9 @@
+---
+title: "Da tabela longa à matriz"
+---
+
+Slide 47 — quem vota como quem? A decisão crítica é a ausência: AP e MIS são ausência; P-NRV é
+presença sem voto. Tratar NA como discordância inventa oposição que não existe.
+
+```{r matriz-votacao-nominal, file="01_matriz_votacao_nominal.R"}
+```

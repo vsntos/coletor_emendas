@@ -1,0 +1,11 @@
+---
+title: "Três formatos, três perguntas"
+---
+
+Slide 53 — escolha a geometria a partir da pergunta, não do repertório que você já domina.
+`ggplot2` para comparação, `geobr` para território, `gt` para precisão.
+
+```{r comunicacao-visual, file="06_comunicacao_visual.R"}
+```
+
+![](../figuras/mapa-comissoes-por-uf.png)
