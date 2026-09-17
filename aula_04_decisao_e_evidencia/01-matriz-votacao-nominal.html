@@ -354,9 +354,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs: curso_senatebR/dados/sim_mat_2023.rds</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr)))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyr)))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tibble)))</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>votacoes <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/votacoes_2019_2023.rds"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Ano <span class="sc">==</span> <span class="st">"2023"</span>)</span>
@@ -371,31 +371,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">column_to_rownames</span>(<span class="st">"Votos.CodigoParlamentar"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Matriz bruta: "</span>, <span class="fu">nrow</span>(mat), <span class="st">" senadores x "</span>, <span class="fu">ncol</span>(mat), <span class="st">" votacoes nominais de 2023."</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Proporcao de celulas ausentes (NA): "</span>, <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">is.na</span>(mat)), <span class="dv">3</span>),</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">" -- um senador so tem voto registrado nas sessoes em que participou."</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA METODOLOGICA (esta e a decisao critica do slide 47, aprofundada no</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Lab 3): ausencia (NA apos o pivot) NAO e discordancia. Para esta</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstracao -- so para viabilizar o calculo de distancia -- preenchemos</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># NA com 0.5 (um ponto neutro entre sim e nao). Isso NAO e uma escolha de</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># pesquisa defensavel por si so; e um placeholder documentado. O Lab 3</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># pede explicitamente que voce declare e justifique o SEU tratamento de</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ausencia (AP/MIS vs. P-NRV) antes de calcular similaridade.</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>mat_preenchida <span class="ot">&lt;-</span> mat</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>mat_preenchida[<span class="fu">is.na</span>(mat_preenchida)] <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. concordancia par a par</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(stats<span class="sc">::</span><span class="fu">dist</span>(mat_preenchida, <span class="at">method =</span> <span class="st">"manhattan"</span>))</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>sim_mat <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> dist_mat <span class="sc">/</span> <span class="fu">ncol</span>(mat_preenchida)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados"</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(sim_mat, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/sim_mat_2023.rds"</span>))</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Matriz de similaridade ("</span>, <span class="fu">nrow</span>(sim_mat), <span class="st">" x "</span>, <span class="fu">ncol</span>(sim_mat), <span class="st">") salva em "</span>,</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/sim_mat_2023.rds"</span>))</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># values_fn = first resolve o caso de um mesmo senador aparecer duas vezes</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co"># na mesma votacao. Se isso acontece, investigue antes de silenciar.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Matriz bruta: "</span>, <span class="fu">nrow</span>(mat), <span class="st">" senadores x "</span>, <span class="fu">ncol</span>(mat), <span class="st">" votacoes nominais de 2023."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Matriz bruta: 85 senadores x 50 votacoes nominais de 2023.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Proporcao de celulas ausentes (NA): "</span>, <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">is.na</span>(mat)), <span class="dv">3</span>),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">" -- um senador so tem voto registrado nas sessoes em que participou."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Proporcao de celulas ausentes (NA): 0.218 -- um senador so tem voto registrado nas sessoes em que participou.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA METODOLOGICA (esta e a decisao critica do slide 47, aprofundada no</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Lab 3): ausencia (NA apos o pivot) NAO e discordancia. Para esta</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstracao -- so para viabilizar o calculo de distancia -- preenchemos</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># NA com 0.5 (um ponto neutro entre sim e nao). Isso NAO e uma escolha de</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pesquisa defensavel por si so; e um placeholder documentado. O Lab 3</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pede explicitamente que voce declare e justifique o SEU tratamento de</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ausencia (AP/MIS vs. P-NRV) antes de calcular similaridade.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mat_preenchida <span class="ot">&lt;-</span> mat</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>mat_preenchida[<span class="fu">is.na</span>(mat_preenchida)] <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. concordancia par a par</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(stats<span class="sc">::</span><span class="fu">dist</span>(mat_preenchida, <span class="at">method =</span> <span class="st">"manhattan"</span>))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>sim_mat <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> dist_mat <span class="sc">/</span> <span class="fu">ncol</span>(mat_preenchida)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados"</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(sim_mat, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/sim_mat_2023.rds"</span>))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Matriz de similaridade ("</span>, <span class="fu">nrow</span>(sim_mat), <span class="st">" x "</span>, <span class="fu">ncol</span>(sim_mat), <span class="st">") salva em "</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/sim_mat_2023.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Matriz de similaridade (85 x 85) salva em /Users/viniciussantos/Desktop/coletor_emendas/curso_senatebR/dados/sim_mat_2023.rds</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># values_fn = first resolve o caso de um mesmo senador aparecer duas vezes</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># na mesma votacao. Se isso acontece, investigue antes de silenciar.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

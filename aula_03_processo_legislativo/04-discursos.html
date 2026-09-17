@@ -352,8 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs: none (script de demonstracao)</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(senatebR)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(senatebR)))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr)))</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>senadores <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/senadores_57.rds"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">"IdentificacaoParlamentar</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, .x))</span>
@@ -389,25 +389,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_inicio =</span> <span class="st">"20230201"</span>,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_fim =</span> <span class="st">"20231231"</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(discursos), <span class="st">" discursos individuais encontrados para "</span>, volume<span class="sc">$</span>NomeParlamentar[<span class="dv">1</span>], <span class="st">" em 2023."</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># e quem interrompe quem em plenario</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA (verificado ao vivo em 2026-09-17): processar_xml_apartes() nao</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># aceita o CodigoParlamentar do senador -- rejeita com "Código inválido ou</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># muito longo" para todos os codigos testados aqui. E uma medida de</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># conflito "raramente usada" (slide 41); nao investigamos mais fundo o</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># formato de codigo que a funcao espera internamente. Documentar isso e</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># parte do resultado (slide 26: honestidade metodologica).</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>apartes <span class="ot">&lt;-</span> <span class="fu">processar_xml_apartes</span>(<span class="at">codigos =</span> codigos_amostra)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(apartes), <span class="st">" apartes registrados para a amostra."</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Volume de discurso e uma medida de esforco de representacao -- e</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># frequentemente diverge do comportamento em votacao. E ai que fica</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># interessante.</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Analise de texto (frequencia, topicos, sentimento) e um campo inteiro.</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Esta oficina para na coleta e na contagem -- o livro segue adiante no</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># capitulo 7.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(discursos), <span class="st">" discursos individuais encontrados para "</span>, volume<span class="sc">$</span>NomeParlamentar[<span class="dv">1</span>], <span class="st">" em 2023."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>30 discursos individuais encontrados para Alan Rick em 2023.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># e quem interrompe quem em plenario</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA (verificado ao vivo em 2026-09-17): processar_xml_apartes() nao</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># aceita o CodigoParlamentar do senador -- rejeita com "Código inválido ou</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># muito longo" para todos os codigos testados aqui. E uma medida de</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># conflito "raramente usada" (slide 41); nao investigamos mais fundo o</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># formato de codigo que a funcao espera internamente. Documentar isso e</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># parte do resultado (slide 26: honestidade metodologica).</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>apartes <span class="ot">&lt;-</span> <span class="fu">processar_xml_apartes</span>(<span class="at">codigos =</span> codigos_amostra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5918</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 6382</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 6346</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 6026</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5672</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5923</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5982</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 6360</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 3651</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 6379</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5962</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5989</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 6358</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5950</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Código inválido ou muito longo: 5969</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(apartes), <span class="st">" apartes registrados para a amostra."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>0 apartes registrados para a amostra.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Volume de discurso e uma medida de esforco de representacao -- e</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># frequentemente diverge do comportamento em votacao. E ai que fica</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># interessante.</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Analise de texto (frequencia, topicos, sentimento) e um campo inteiro.</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Esta oficina para na coleta e na contagem -- o livro segue adiante no</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># capitulo 7.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

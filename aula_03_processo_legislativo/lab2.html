@@ -364,8 +364,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs: curso_senatebR/dados/lab2_duracoes_cohort_2020.rds</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(senatebR)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(senatebR)))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr)))</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># reaproveita R/comparacao_materias.R (ja existente na raiz do projeto,</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># construido para o pipeline de emendas do PL 2338/2023) -- ver a nota</span></span>
@@ -380,22 +380,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>materias <span class="ot">&lt;-</span> <span class="fu">materias_legislatura_atual</span>()</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>achado <span class="ot">&lt;-</span> materias <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(CodigoMateria <span class="sc">==</span> caso<span class="sc">$</span>codigo)</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(achado), <span class="st">" ocorrencias do PL 2630/2020 em materias_legislatura_atual()."</span>)</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Esperado: 0 -- a materia ja foi remetida a Camara e nao tramita mais no Senado "</span>,</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"(IndicadorTramitando == </span><span class="sc">\"</span><span class="st">Sim</span><span class="sc">\"</span><span class="st"> para todas as linhas desta funcao). Mesma lacuna "</span>,</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"documentada em curso_senatebR/aula_03_processo_legislativo/02_materias_e_tramitacao.R."</span>)</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># PASSO 2 -- subtipo (PL) e quantas materias do mesmo subtipo por ano</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># (AnoMateria e so o ano; para "rapido ou lento" de verdade, PASSO 4 usa</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># datas de verdade, nao contagem por ano)</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>pls_por_ano <span class="ot">&lt;-</span> materias <span class="sc">|&gt;</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(SiglaSubtipoMateria <span class="sc">==</span> <span class="st">"PL"</span>, <span class="sc">!</span><span class="fu">is.na</span>(AnoMateria)) <span class="sc">|&gt;</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(<span class="at">Ano =</span> <span class="fu">as.integer</span>(AnoMateria), <span class="at">name =</span> <span class="st">"n_pls"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(dplyr<span class="sc">::</span><span class="fu">desc</span>(Ano))</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(utils<span class="sc">::</span><span class="fu">head</span>(pls_por_ano, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(achado), <span class="st">" ocorrencias do PL 2630/2020 em materias_legislatura_atual()."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>0 ocorrencias do PL 2630/2020 em materias_legislatura_atual().</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Esperado: 0 -- a materia ja foi remetida a Camara e nao tramita mais no Senado "</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"(IndicadorTramitando == </span><span class="sc">\"</span><span class="st">Sim</span><span class="sc">\"</span><span class="st"> para todas as linhas desta funcao). Mesma lacuna "</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"documentada em curso_senatebR/aula_03_processo_legislativo/02_materias_e_tramitacao.R."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Esperado: 0 -- a materia ja foi remetida a Camara e nao tramita mais no Senado (IndicadorTramitando == "Sim" para todas as linhas desta funcao). Mesma lacuna documentada em curso_senatebR/aula_03_processo_legislativo/02_materias_e_tramitacao.R.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># PASSO 2 -- subtipo (PL) e quantas materias do mesmo subtipo por ano</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (AnoMateria e so o ano; para "rapido ou lento" de verdade, PASSO 4 usa</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># datas de verdade, nao contagem por ano)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>pls_por_ano <span class="ot">&lt;-</span> materias <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(SiglaSubtipoMateria <span class="sc">==</span> <span class="st">"PL"</span>, <span class="sc">!</span><span class="fu">is.na</span>(AnoMateria)) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(<span class="at">Ano =</span> <span class="fu">as.integer</span>(AnoMateria), <span class="at">name =</span> <span class="st">"n_pls"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(dplyr<span class="sc">::</span><span class="fu">desc</span>(Ano))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(utils<span class="sc">::</span><span class="fu">head</span>(pls_por_ano, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Ano n_pls
 1 2026   436
@@ -407,83 +412,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 7 2020   464
 8 2019   935</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cohort de comparacao buscado aqui (em vez de so no PASSO 4) porque e a</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unica fonte, entre as ja usadas neste script, que traz a situacao_atual</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># de verdade da materia -- buscar_codigo_materia() (usado em</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 01_caso_da_oficina.R) nao retorna esse campo.</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cohort_2020 <span class="ot">&lt;-</span> <span class="fu">buscar_cohort_deliberacao</span>(<span class="dv">2020</span>, <span class="st">"PL"</span>, <span class="st">"APROVADA_NO_PLENARIO"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(caso<span class="sc">$</span>codigo <span class="sc">%in%</span> cohort_2020<span class="sc">$</span>codigo_materia)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>situacao_atual_caso <span class="ot">&lt;-</span> cohort_2020<span class="sc">$</span>situacao_atual[cohort_2020<span class="sc">$</span>codigo_materia <span class="sc">==</span> caso<span class="sc">$</span>codigo]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># PASSO 3 -- dicionario de situacoes de tramitacao</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>situacoes <span class="ot">&lt;-</span> <span class="fu">extrair_situacoes_tramitacao</span>()</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(situacoes), <span class="st">" situacoes possiveis no catalogo. Situacao atual do nosso caso: </span><span class="sc">\"</span><span class="st">"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        situacao_atual_caso, <span class="st">"</span><span class="sc">\"</span><span class="st">."</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># PASSO 4 -- "rapido ou lento", com numero de verdade: dias entre</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># apresentacao e aprovacao no Plenario, comparado a um cohort de PLs de</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 2020 que chegaram ao MESMO marco processual (APROVADA_NO_PLENARIO) --</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># mesma logica do exemplo de emendas (ver exemplos_aplicados/</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ranking_de_emendas.md), so que medindo tempo em vez de nº de emendas.</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>votacoes <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/votacoes_2019_2023.rds"</span>))</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>aprovacoes <span class="ot">&lt;-</span> votacoes <span class="sc">|&gt;</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Resultado <span class="sc">==</span> <span class="st">"A"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(CodigoMateria) <span class="sc">|&gt;</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">data_aprovacao =</span> <span class="fu">min</span>(DataSessao), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA: so entram no calculo os PLs do cohort que tiveram uma VOTACAO</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co"># NOMINAL registrada -- a maioria das aprovacoes no Senado e simbolica</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"># (sem registro nominal), entao esta amostra tende a ser de materias mais</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># disputadas/visiveis, nao do universo inteiro dos 183 PLs do cohort.</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Declarar isso e parte do resultado.</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>duracoes <span class="ot">&lt;-</span> cohort_2020 <span class="sc">|&gt;</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">inner_join</span>(aprovacoes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"codigo_materia"</span> <span class="ot">=</span> <span class="st">"CodigoMateria"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">dias_tramitacao =</span> <span class="fu">as.numeric</span>(<span class="fu">as.Date</span>(data_aprovacao) <span class="sc">-</span> <span class="fu">as.Date</span>(data_apresentacao))) <span class="sc">|&gt;</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(dias_tramitacao) <span class="sc">|&gt;</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">posicao =</span> dplyr<span class="sc">::</span><span class="fu">row_number</span>())</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados"</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(duracoes, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/lab2_duracoes_cohort_2020.rds"</span>))</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>nosso_caso <span class="ot">&lt;-</span> duracoes <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(codigo_materia <span class="sc">==</span> caso<span class="sc">$</span>codigo)</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>mediana_cohort <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">median</span>(duracoes<span class="sc">$</span>dias_tramitacao)</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">Com votacao nominal registrada: "</span>, <span class="fu">nrow</span>(duracoes), <span class="st">" de "</span>, <span class="fu">nrow</span>(cohort_2020),</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">" PLs de 2020 aprovados no Plenario."</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">FRASE: o PL 2630/2020 tramitou "</span>, nosso_caso<span class="sc">$</span>dias_tramitacao, <span class="st">" dias (apresentacao em "</span>,</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  nosso_caso<span class="sc">$</span>data_apresentacao, <span class="st">", aprovacao em "</span>, nosso_caso<span class="sc">$</span>data_aprovacao,</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="st">"), contra uma mediana de "</span>, mediana_cohort, <span class="st">" dias entre os "</span>, <span class="fu">nrow</span>(duracoes),</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="st">" PLs de 2020 comparaveis (posicao "</span>, nosso_caso<span class="sc">$</span>posicao, <span class="st">" de "</span>, <span class="fu">nrow</span>(duracoes),</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">", do mais rapido para o mais lento)."</span></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">Interpretacao honesta: 48 dias e rapido em termos absolutos, mas "</span>, nosso_caso<span class="sc">$</span>posicao,</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/"</span>, <span class="fu">nrow</span>(duracoes), <span class="st">" esta bem perto da MEDIANA do cohort -- ou seja, o PL 2630 nao foi um "</span>,</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"outlier de velocidade entre PLs que chegam ao Plenario. A narrativa de </span><span class="sc">\"</span><span class="st">aprovado as pressas</span><span class="sc">\"</span><span class="st"> "</span>,</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(slide 9) e sobre visibilidade politica, nao sobre desvio estatistico do tempo de tramitacao."</span></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co"># SE SOBRAR TEMPO -- a agenda de hoje tem o tema do caso?</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>hoje <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>agenda_hoje <span class="ot">&lt;-</span> <span class="fu">info_agenda</span>(</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">anos =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(hoje, <span class="st">"%Y"</span>)),</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">meses =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(hoje, <span class="st">"%m"</span>)),</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">dias =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(hoje, <span class="st">"%d"</span>))</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">Agenda de hoje ("</span>, hoje, <span class="st">"): "</span>, <span class="fu">nrow</span>(agenda_hoje), <span class="st">" itens. O PL 2630/2020 nao pode aparecer -- "</span>,</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ja esta na Camara, fora da agenda do Senado."</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cohort de comparacao buscado aqui (em vez de so no PASSO 4) porque e a</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unica fonte, entre as ja usadas neste script, que traz a situacao_atual</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># de verdade da materia -- buscar_codigo_materia() (usado em</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 01_caso_da_oficina.R) nao retorna esse campo.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>cohort_2020 <span class="ot">&lt;-</span> <span class="fu">buscar_cohort_deliberacao</span>(<span class="dv">2020</span>, <span class="st">"PL"</span>, <span class="st">"APROVADA_NO_PLENARIO"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(caso<span class="sc">$</span>codigo <span class="sc">%in%</span> cohort_2020<span class="sc">$</span>codigo_materia)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>situacao_atual_caso <span class="ot">&lt;-</span> cohort_2020<span class="sc">$</span>situacao_atual[cohort_2020<span class="sc">$</span>codigo_materia <span class="sc">==</span> caso<span class="sc">$</span>codigo]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># PASSO 3 -- dicionario de situacoes de tramitacao</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>situacoes <span class="ot">&lt;-</span> <span class="fu">extrair_situacoes_tramitacao</span>()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="fu">nrow</span>(situacoes), <span class="st">" situacoes possiveis no catalogo. Situacao atual do nosso caso: </span><span class="sc">\"</span><span class="st">"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        situacao_atual_caso, <span class="st">"</span><span class="sc">\"</span><span class="st">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>175 situacoes possiveis no catalogo. Situacao atual do nosso caso: "REMETIDA À CÂMARA DOS DEPUTADOS".</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># PASSO 4 -- "rapido ou lento", com numero de verdade: dias entre</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># apresentacao e aprovacao no Plenario, comparado a um cohort de PLs de</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2020 que chegaram ao MESMO marco processual (APROVADA_NO_PLENARIO) --</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mesma logica do exemplo de emendas (ver exemplos_aplicados/</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ranking_de_emendas.md), so que medindo tempo em vez de nº de emendas.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>votacoes <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/votacoes_2019_2023.rds"</span>))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>aprovacoes <span class="ot">&lt;-</span> votacoes <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Resultado <span class="sc">==</span> <span class="st">"A"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(CodigoMateria) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">data_aprovacao =</span> <span class="fu">min</span>(DataSessao), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># NOTA: so entram no calculo os PLs do cohort que tiveram uma VOTACAO</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># NOMINAL registrada -- a maioria das aprovacoes no Senado e simbolica</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># (sem registro nominal), entao esta amostra tende a ser de materias mais</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># disputadas/visiveis, nao do universo inteiro dos 183 PLs do cohort.</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Declarar isso e parte do resultado.</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>duracoes <span class="ot">&lt;-</span> cohort_2020 <span class="sc">|&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">inner_join</span>(aprovacoes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"codigo_materia"</span> <span class="ot">=</span> <span class="st">"CodigoMateria"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">dias_tramitacao =</span> <span class="fu">as.numeric</span>(<span class="fu">as.Date</span>(data_aprovacao) <span class="sc">-</span> <span class="fu">as.Date</span>(data_apresentacao))) <span class="sc">|&gt;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(dias_tramitacao) <span class="sc">|&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">posicao =</span> dplyr<span class="sc">::</span><span class="fu">row_number</span>())</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados"</span>), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(duracoes, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"curso_senatebR/dados/lab2_duracoes_cohort_2020.rds"</span>))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>nosso_caso <span class="ot">&lt;-</span> duracoes <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(codigo_materia <span class="sc">==</span> caso<span class="sc">$</span>codigo)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>mediana_cohort <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">median</span>(duracoes<span class="sc">$</span>dias_tramitacao)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">Com votacao nominal registrada: "</span>, <span class="fu">nrow</span>(duracoes), <span class="st">" de "</span>, <span class="fu">nrow</span>(cohort_2020),</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">" PLs de 2020 aprovados no Plenario."</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Com votacao nominal registrada: 46 de 183 PLs de 2020 aprovados no Plenario.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">FRASE: o PL 2630/2020 tramitou "</span>, nosso_caso<span class="sc">$</span>dias_tramitacao, <span class="st">" dias (apresentacao em "</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  nosso_caso<span class="sc">$</span>data_apresentacao, <span class="st">", aprovacao em "</span>, nosso_caso<span class="sc">$</span>data_aprovacao,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"), contra uma mediana de "</span>, mediana_cohort, <span class="st">" dias entre os "</span>, <span class="fu">nrow</span>(duracoes),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">" PLs de 2020 comparaveis (posicao "</span>, nosso_caso<span class="sc">$</span>posicao, <span class="st">" de "</span>, <span class="fu">nrow</span>(duracoes),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">", do mais rapido para o mais lento)."</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+FRASE: o PL 2630/2020 tramitou 48 dias (apresentacao em 2020-05-13, aprovacao em 2020-06-30), contra uma mediana de 47 dias entre os 46 PLs de 2020 comparaveis (posicao 25 de 46, do mais rapido para o mais lento).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">Interpretacao honesta: "</span>, nosso_caso<span class="sc">$</span>dias_tramitacao, <span class="st">" dias e rapido em termos absolutos, "</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mas "</span>, nosso_caso<span class="sc">$</span>posicao, <span class="st">"/"</span>, <span class="fu">nrow</span>(duracoes), <span class="st">" esta bem perto da MEDIANA do cohort -- ou "</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"seja, o PL 2630 nao foi um outlier de velocidade entre PLs que chegam ao Plenario. A narrativa "</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"de </span><span class="sc">\"</span><span class="st">aprovado as pressas</span><span class="sc">\"</span><span class="st"> (slide 9) e sobre visibilidade politica, nao sobre desvio "</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"estatistico do tempo de tramitacao."</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Interpretacao honesta: 48 dias e rapido em termos absolutos, mas 25/46 esta bem perto da MEDIANA do cohort -- ou seja, o PL 2630 nao foi um outlier de velocidade entre PLs que chegam ao Plenario. A narrativa de "aprovado as pressas" (slide 9) e sobre visibilidade politica, nao sobre desvio estatistico do tempo de tramitacao.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SE SOBRAR TEMPO -- a agenda de hoje tem o tema do caso?</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>hoje <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>agenda_hoje <span class="ot">&lt;-</span> <span class="fu">info_agenda</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">anos =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(hoje, <span class="st">"%Y"</span>)),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">meses =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(hoje, <span class="st">"%m"</span>)),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">dias =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(hoje, <span class="st">"%d"</span>))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="sc">\n</span><span class="st">Agenda de hoje ("</span>, hoje, <span class="st">"): "</span>, <span class="fu">nrow</span>(agenda_hoje), <span class="st">" itens. O PL 2630/2020 nao pode aparecer -- "</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ja esta na Camara, fora da agenda do Senado."</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Agenda de hoje (2026-09-17): 12 itens. O PL 2630/2020 nao pode aparecer -- ja esta na Camara, fora da agenda do Senado.</code></pre>
+</div>
 </div>
 
 
