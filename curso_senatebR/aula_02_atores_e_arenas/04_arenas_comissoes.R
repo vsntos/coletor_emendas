@@ -11,8 +11,8 @@
 # Outputs: curso_senatebR/dados/membros_comissoes_57.rds
 # ============================================================
 
-library(senatebR)
-library(dplyr)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 senadores <- readRDS(here::here("curso_senatebR/dados/senadores_57.rds")) |>
   dplyr::rename_with(~ gsub("IdentificacaoParlamentar\\.", "", .x))
@@ -27,7 +27,9 @@ comissoes <- dados_comissoes()
 
 # onde cada ator atua: aceita um vetor de codigos
 codigos <- unique(stats::na.omit(senadores$CodigoParlamentar))
-membros <- obter_dados_comissoes_parlamentares(codigos)
+# suppressWarnings: a funcao emite "Nao ha dados de comissoes disponiveis"
+# por codigo sem comissao (suplentes/afastados) -- ja esperado, nao um achado
+membros <- suppressWarnings(obter_dados_comissoes_parlamentares(codigos))
 
 dir.create(here::here("curso_senatebR/dados"), recursive = TRUE, showWarnings = FALSE)
 saveRDS(membros, here::here("curso_senatebR/dados/membros_comissoes_57.rds"))

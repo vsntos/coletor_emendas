@@ -12,9 +12,9 @@
 # Outputs: curso_senatebR/figuras/heatmap-similaridade-2023.png
 # ============================================================
 
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyr)))
+suppressWarnings(suppressPackageStartupMessages(library(ggplot2)))
 
 sim_mat <- readRDS(here::here("curso_senatebR/dados/sim_mat_2023.rds"))
 

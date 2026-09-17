@@ -13,11 +13,11 @@
 # Outputs: none (define funcoes; cacheia respostas em disco)
 # ============================================================
 
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(tibble)
-library(purrr)
+suppressWarnings(suppressPackageStartupMessages(library(httr)))
+suppressWarnings(suppressPackageStartupMessages(library(jsonlite)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tibble)))
+suppressWarnings(suppressPackageStartupMessages(library(purrr)))
 
 SENADO_API <- "https://legis.senado.leg.br/dadosabertos"
 

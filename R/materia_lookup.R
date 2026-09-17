@@ -9,8 +9,8 @@
 # Outputs: none (define funcoes)
 # ============================================================
 
-library(httr)
-library(jsonlite)
+suppressWarnings(suppressPackageStartupMessages(library(httr)))
+suppressWarnings(suppressPackageStartupMessages(library(jsonlite)))
 
 SENADO_API <- "https://legis.senado.leg.br/dadosabertos"
 

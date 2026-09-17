@@ -14,10 +14,10 @@
 # Outputs: curso_senatebR/figuras/mapa-comissoes-por-uf.png
 # ============================================================
 
-library(dplyr)
-library(ggplot2)
-library(geobr)
-library(gt)
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(ggplot2)))
+suppressWarnings(suppressPackageStartupMessages(library(geobr)))
+suppressWarnings(suppressPackageStartupMessages(library(gt)))
 
 senadores <- readRDS(here::here("curso_senatebR/dados/senadores_57.rds")) |>
   dplyr::rename_with(~ gsub("IdentificacaoParlamentar\\.", "", .x))

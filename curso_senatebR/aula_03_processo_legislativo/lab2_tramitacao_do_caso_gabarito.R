@@ -23,8 +23,8 @@
 # Outputs: curso_senatebR/dados/lab2_duracoes_cohort_2020.rds
 # ============================================================
 
-library(senatebR)
-library(dplyr)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 # reaproveita R/comparacao_materias.R (ja existente na raiz do projeto,
 # construido para o pipeline de emendas do PL 2338/2023) -- ver a nota
@@ -114,10 +114,11 @@ message(
   ", do mais rapido para o mais lento)."
 )
 message(
-  "\nInterpretacao honesta: 48 dias e rapido em termos absolutos, mas ", nosso_caso$posicao,
-  "/", nrow(duracoes), " esta bem perto da MEDIANA do cohort -- ou seja, o PL 2630 nao foi um ",
-  "outlier de velocidade entre PLs que chegam ao Plenario. A narrativa de \"aprovado as pressas\" ",
-  "(slide 9) e sobre visibilidade politica, nao sobre desvio estatistico do tempo de tramitacao."
+  "\nInterpretacao honesta: ", nosso_caso$dias_tramitacao, " dias e rapido em termos absolutos, ",
+  "mas ", nosso_caso$posicao, "/", nrow(duracoes), " esta bem perto da MEDIANA do cohort -- ou ",
+  "seja, o PL 2630 nao foi um outlier de velocidade entre PLs que chegam ao Plenario. A narrativa ",
+  "de \"aprovado as pressas\" (slide 9) e sobre visibilidade politica, nao sobre desvio ",
+  "estatistico do tempo de tramitacao."
 )
 
 # ------------------------------------------------------------

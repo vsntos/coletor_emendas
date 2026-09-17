@@ -10,16 +10,22 @@
 # ============================================================
 
 # 1. o pacote esta no CRAN
-if (!requireNamespace("senatebR", quietly = TRUE)) install.packages("senatebR")
+# NOTA: requireNamespace(quietly = TRUE) so silencia o aviso de "pacote nao
+# encontrado" -- carregar o namespace de um pacote ja instalado ainda pode
+# emitir avisos de conflito de importacao (ex.: magrittr::set_names vs
+# purrr::set_names dentro do senatebR), entao envolvemos em suppressWarnings()
+if (!suppressWarnings(suppressMessages(requireNamespace("senatebR", quietly = TRUE)))) install.packages("senatebR")
 
 # 2. pacotes de apoio da oficina
 pacotes_apoio <- c("tidyverse", "lubridate", "gt", "igraph", "ggraph", "geobr")
-faltando <- pacotes_apoio[!vapply(pacotes_apoio, requireNamespace, logical(1), quietly = TRUE)]
+faltando <- pacotes_apoio[!suppressWarnings(suppressMessages(
+  vapply(pacotes_apoio, requireNamespace, logical(1), quietly = TRUE)
+))]
 if (length(faltando) > 0) install.packages(faltando)
 
 # 3. carregar
-library(senatebR)
-library(tidyverse)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
 
 # 4. teste de fumaca: a API responde?
 senadores <- obter_dados_senadores_legislatura(57, 57)

@@ -13,7 +13,7 @@
 # Outputs: none (script de demonstracao)
 # ============================================================
 
-library(senatebR)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
 
 hoje <- Sys.Date()
 

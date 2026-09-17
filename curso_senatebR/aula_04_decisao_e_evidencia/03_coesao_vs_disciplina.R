@@ -15,8 +15,8 @@
 # Outputs: curso_senatebR/dados/disciplina_2023.rds
 # ============================================================
 
-library(senatebR)
-library(dplyr)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 # 1. votos individuais
 nominais <- readRDS(here::here("curso_senatebR/dados/votacoes_2019_2023.rds")) |>

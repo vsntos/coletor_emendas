@@ -10,8 +10,8 @@
 # Outputs: curso_senatebR/dados/materias_legislatura_atual.rds
 # ============================================================
 
-library(senatebR)
-library(dplyr)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 # 1. oferta: o que foi apresentado (e ainda tramita -- ver nota abaixo)
 materias <- materias_legislatura_atual()

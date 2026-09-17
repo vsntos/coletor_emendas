@@ -13,9 +13,9 @@
 # Outputs: curso_senatebR/dados/sim_mat_2023.rds
 # ============================================================
 
-library(dplyr)
-library(tidyr)
-library(tibble)
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tibble)))
 
 votacoes <- readRDS(here::here("curso_senatebR/dados/votacoes_2019_2023.rds")) |>
   dplyr::filter(Ano == "2023")

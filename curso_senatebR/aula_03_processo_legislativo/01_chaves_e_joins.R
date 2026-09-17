@@ -12,7 +12,7 @@
 # Outputs: none (script de demonstracao)
 # ============================================================
 
-library(dplyr)
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 senadores <- readRDS(here::here("curso_senatebR/dados/senadores_57.rds")) |>
   dplyr::rename_with(~ gsub("IdentificacaoParlamentar\\.", "", .x))

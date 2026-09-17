@@ -12,8 +12,8 @@
 # Outputs: curso_senatebR/figuras/coesao-2023.png
 # ============================================================
 
-library(senatebR)
-library(tidyverse)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
 
 # ------------------------------------------------------------
 # SLIDE 13 -- duas formas de obter a mesma tabela
@@ -41,7 +41,9 @@ senadores <- obter_dados_senadores_legislatura(57, 57)
 # ETAPA 1-2 (slide 15) -- COLETA: duas chamadas, dois universos
 # ------------------------------------------------------------
 # o quê: todas as votacoes nominais do ano
-votacoes <- extrair_votacoes_nominais_por_ano(anos = 2023)
+# suppressWarnings: a funcao emite um aviso interno de coercao de tipo por
+# registro processado (implementacao do parsing XML do pacote, nao um achado)
+votacoes <- suppressWarnings(extrair_votacoes_nominais_por_ano(anos = 2023))
 
 dplyr::glimpse(votacoes)
 # Uma linha por senador por votacao: esse e o grao da analise.

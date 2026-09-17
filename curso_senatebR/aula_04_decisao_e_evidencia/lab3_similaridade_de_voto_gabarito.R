@@ -24,9 +24,9 @@
 # Outputs: curso_senatebR/dados/lab3_atipicos.rds
 # ============================================================
 
-library(dplyr)
-library(tidyr)
-library(tibble)
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tibble)))
 
 # Passos 1-3 (matriz, similaridade, heatmap) ja estao resolvidos em
 # curso_senatebR/aula_04_decisao_e_evidencia/01_matriz_votacao_nominal.R e

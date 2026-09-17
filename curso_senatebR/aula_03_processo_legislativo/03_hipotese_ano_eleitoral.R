@@ -12,9 +12,9 @@
 # Outputs: curso_senatebR/figuras/materias-ano-eleitoral.png
 # ============================================================
 
-library(lubridate)
-library(dplyr)
-library(ggplot2)
+suppressWarnings(suppressPackageStartupMessages(library(lubridate)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(ggplot2)))
 
 materias <- readRDS(here::here("curso_senatebR/dados/materias_legislatura_atual.rds"))
 

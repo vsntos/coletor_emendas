@@ -28,10 +28,10 @@
 # Outputs: curso_senatebR/figuras/rede-coparticipacao-comissoes.png
 # ============================================================
 
-library(igraph)
-library(ggraph)
-library(dplyr)
-library(tidyr)
+suppressWarnings(suppressPackageStartupMessages(library(igraph)))
+suppressWarnings(suppressPackageStartupMessages(library(ggraph)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyr)))
 
 senadores <- readRDS(here::here("curso_senatebR/dados/senadores_57.rds")) |>
   dplyr::rename_with(~ gsub("IdentificacaoParlamentar\\.", "", .x))

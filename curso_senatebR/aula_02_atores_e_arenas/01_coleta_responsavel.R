@@ -13,15 +13,18 @@
 #          curso_senatebR/dados/senadores_57.rds
 # ============================================================
 
-library(senatebR)
-library(dplyr)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 dir.create(here::here("curso_senatebR", "dados"), recursive = TRUE, showWarnings = FALSE)
 
 # em loop, sempre com pausa e protecao
 coletar <- function(ano) {
   Sys.sleep(0.5)
-  tryCatch(extrair_votacoes_nominais_por_ano(anos = ano), error = function(e) NULL)
+  # suppressWarnings: a funcao emite um aviso interno de coercao de tipo por
+  # registro processado (implementacao do parsing XML do pacote, nao um
+  # achado -- ver 04_discursos.R para um exemplo de aviso que E um achado)
+  tryCatch(suppressWarnings(extrair_votacoes_nominais_por_ano(anos = ano)), error = function(e) NULL)
 }
 
 votacoes <- lapply(2019:2023, coletar) |> dplyr::bind_rows()

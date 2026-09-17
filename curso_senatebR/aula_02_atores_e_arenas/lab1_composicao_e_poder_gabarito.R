@@ -17,8 +17,8 @@
 #          curso_senatebR/figuras/lab1-bancada-partido.png
 # ============================================================
 
-library(senatebR)
-library(tidyverse)
+suppressWarnings(suppressPackageStartupMessages(library(senatebR)))
+suppressWarnings(suppressPackageStartupMessages(library(tidyverse)))
 
 caso <- readRDS(here::here("curso_senatebR/dados/caso_pl2630.rds"))
 message("Caso: ", caso$identificacao, " -- aprovado no Senado em 2020, na 56a legislatura.")
@@ -77,7 +77,9 @@ ggplot2::ggsave(here::here("curso_senatebR/figuras/lab1-bancada-partido.png"), g
 # sobrerrepresentacao = participacao na comissao / participacao no plenario
 # ------------------------------------------------------------
 codigos <- unique(stats::na.omit(senadores$CodigoParlamentar))
-membros <- obter_dados_comissoes_parlamentares(codigos) |>
+# suppressWarnings: a funcao emite "Nao ha dados de comissoes disponiveis"
+# por codigo sem comissao (suplentes/afastados) -- ja esperado, nao um achado
+membros <- suppressWarnings(obter_dados_comissoes_parlamentares(codigos)) |>
   dplyr::filter(!is.na(IdentificacaoComissao.CodigoComissao)) |>
   dplyr::left_join(senadores, by = "CodigoParlamentar")
 
